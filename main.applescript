@@ -182,8 +182,6 @@ on SetAudioDevice(myDeviceName, myType)
 				perform action "AXShowMenu" of outline 1 of scroll area 1 of splitter group 1
 				
 				tell menu 1 of outline 1 of scroll area 1 of splitter group 1
-					--click menu item 5 of menu 1 of outline 1 of scroll area 1 of splitter group 1
-					--click menu item 6 of menu 1 of outline 1 of scroll area 1 of splitter group 1
 					click menu item 5
 				end tell
 				tell application "System Events"
@@ -191,8 +189,6 @@ on SetAudioDevice(myDeviceName, myType)
 				end tell
 				perform action "AXShowMenu" of outline 1 of scroll area 1 of splitter group 1
 				tell menu 1 of outline 1 of scroll area 1 of splitter group 1
-					--click menu item 5 of menu 1 of outline 1 of scroll area 1 of splitter group 1
-					--click menu item 6 of menu 1 of outline 1 of scroll area 1 of splitter group 1
 					click menu item 6
 				end tell
 				tell application "System Events"
