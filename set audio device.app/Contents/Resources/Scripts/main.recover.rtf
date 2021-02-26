@@ -1,0 +1,401 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Verdana;\f1\fnil\fcharset0 Verdana-Bold;\f2\fnil\fcharset0 Verdana-Italic;
+}
+{\colortbl;\red255\green255\blue255;\red76\green78\blue78;\red0\green0\blue0;\red0\green0\blue255;
+\red251\green0\blue7;\red108\green5\blue211;\red64\green128\blue0;}
+{\*\expandedcolortbl;;\csgenericrgb\c29999\c30457\c30457;\csgenericrgb\c0\c0\c0;\csgenericrgb\c0\c0\c100000;
+\cssrgb\c100000\c0\c0;\csgenericrgb\c42337\c1841\c82833;\csgenericrgb\c25000\c50001\c0;}
+\deftab480
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf2 -- modified from script at https://audiophilestyle.com/forums/topic/11819-a-usefull-applescript-code-for-audiophiles/\cf3 \
+\cf2 -- BEGIN APPLESCRIPT --\cf3 \
+\
+
+\f1\b \cf4 activate
+\f0\b0 \cf3  
+\f2\i \cf4 application
+\f0\i0 \cf3  "Audio MIDI Setup"\
+\
+
+\f1\b on
+\f0\b0  \cf5 setBackupAudioDevice\cf3 ()\
+	\cf5 SetAudioDevice\cf3 ("MacBook Pro Speakers", "48,000 Hz", 
+\f2\i \cf6 true
+\f0\i0 \cf3 )\
+
+\f1\b end
+\f0\b0  \cf5 setBackupAudioDevice\cf3 \
+\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf5 SetAudioDevice\cf3 ("HIFI DSD", "24-bit Integer (96.0 kHz)", 
+\f2\i \cf6 false
+\f0\i0 \cf3 )\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+
+\f1\b \cf3 on
+\f0\b0  \cf5 SetAudioDevice\cf3 (\cf7 myDeviceName\cf3 , \cf7 audioFormat\cf3 , \cf7 backupAlreadyFixed\cf3 )\
+	\
+	
+\f1\b \cf4 activate
+\f0\b0 \cf3  
+\f2\i \cf4 application
+\f0\i0 \cf3  "Audio MIDI Setup"\
+	\
+	
+\f1\b tell
+\f0\b0  
+\f2\i \cf4 application
+\f0\i0 \cf3  "System Events"\
+		\
+		
+\f1\b tell
+\f0\b0  
+\f2\i \cf4 process
+\f0\i0 \cf3  "Audio MIDI Setup"\
+			\
+			\cf2 -- Open Audio Devices window if it is closed:\cf3 \
+			\
+			
+\f1\b try
+\f0\b0 \
+				\
+				
+\f1\b \cf4 click
+\f0\b0 \cf3  
+\f2\i \cf4 menu item
+\f0\i0 \cf3  "Show Audio Window" 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 menu
+\f0\i0 \cf3  "Window" 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 menu bar item
+\f0\i0 \cf3  "Window" 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 menu bar
+\f0\i0 \cf3  1\
+				\
+			
+\f1\b end
+\f0\b0  
+\f1\b try
+\f0\b0 \
+			\
+			\cf2 -- List of Audio Devices in left column:\cf3 \
+			\
+			
+\f1\b tell
+\f0\b0  
+\f2\i \cf4 outline
+\f0\i0 \cf3  1 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 scroll area
+\f0\i0 \cf3  1 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 splitter group
+\f0\i0 \cf3  1 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 window
+\f0\i0 \cf3  "Audio Devices"\
+				\
+				\
+				
+\f1\b set
+\f0\b0  \cf7 N\cf3  
+\f1\b to
+\f0\b0  0\
+				\
+				\cf2 -- Set N to index of desired device:\cf3 \
+				\
+				
+\f1\b repeat
+\f0\b0  
+\f1\b with
+\f0\b0  \cf7 k\cf3  
+\f1\b from
+\f0\b0  1 
+\f1\b to
+\f0\b0  (
+\f1\b \cf4 count
+\f0\b0 \cf3  
+\f1\b of
+\f0\b0  
+\f2\i \cf4 rows
+\f0\i0 \cf3 )\
+					
+\f1\b set
+\f0\b0  \cf7 x\cf3  
+\f1\b to
+\f0\b0  \cf6 name\cf3  
+\f1\b of
+\f0\b0  
+\f2\i \cf4 UI element
+\f0\i0 \cf3  1 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 row
+\f0\i0 \cf3  \cf7 k\cf3 \
+					\
+					
+\f1\b if
+\f0\b0  \cf7 x\cf3  = \cf7 myDeviceName\cf3  
+\f1\b then
+\f0\b0 \
+						\
+						
+\f1\b set
+\f0\b0  \cf7 N\cf3  
+\f1\b to
+\f0\b0  \cf7 k\cf3 \
+						\
+						
+\f1\b exit
+\f0\b0  
+\f1\b repeat
+\f0\b0 \
+						\
+					
+\f1\b end
+\f0\b0  
+\f1\b if
+\f0\b0 \
+					\
+				
+\f1\b end
+\f0\b0  
+\f1\b repeat
+\f0\b0 \
+				\
+				
+\f1\b if
+\f0\b0  \cf7 N\cf3  = 0 
+\f1\b then
+\f0\b0 \
+					
+\f1\b if
+\f0\b0  \cf7 backupAlreadyFixed\cf3  
+\f1\b then
+\f0\b0 \
+						
+\f1\b return
+\f0\b0 \
+					
+\f1\b end
+\f0\b0  
+\f1\b if
+\f0\b0 \
+					\
+					
+\f1\b return
+\f0\b0  
+\f1\b my
+\f0\b0  \cf5 setBackupAudioDevice\cf3 ()\
+				
+\f1\b end
+\f0\b0  
+\f1\b if
+\f0\b0 \
+				\
+				
+\f1\b \cf4 select
+\f0\b0 \cf3  
+\f2\i \cf4 row
+\f0\i0 \cf3  \cf7 N\cf3 \
+				
+\f1\b \cf4 quit
+\f0\b0 \cf3 \
+				\
+			
+\f1\b end
+\f0\b0  
+\f1\b tell
+\f0\b0 \
+			\
+			\cf2 --Use this device for sound output:\cf3 \
+			\
+			
+\f1\b tell
+\f0\b0  
+\f2\i \cf4 window
+\f0\i0 \cf3  "Audio Devices"\
+				\
+				\cf2 -- set myDeviceName to default audio output\cf3 \
+				
+\f1\b \cf4 perform
+\f0\b0 \cf3  
+\f2\i \cf4 action
+\f0\i0 \cf3  "AXShowMenu" 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 outline
+\f0\i0 \cf3  1 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 scroll area
+\f0\i0 \cf3  1 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 splitter group
+\f0\i0 \cf3  1\
+				
+\f1\b \cf4 click
+\f0\b0 \cf3  
+\f2\i \cf4 menu item
+\f0\i0 \cf3  5 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 menu
+\f0\i0 \cf3  1 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 outline
+\f0\i0 \cf3  1 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 scroll area
+\f0\i0 \cf3  1 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 splitter group
+\f0\i0 \cf3  1\
+				
+\f1\b \cf4 key code
+\f0\b0 \cf3  53\
+				\
+				\cf2 -- set myDeviceName to default alert sound output\cf3 \
+				
+\f1\b \cf4 perform
+\f0\b0 \cf3  
+\f2\i \cf4 action
+\f0\i0 \cf3  "AXShowMenu" 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 outline
+\f0\i0 \cf3  1 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 scroll area
+\f0\i0 \cf3  1 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 splitter group
+\f0\i0 \cf3  1\
+				
+\f1\b \cf4 click
+\f0\b0 \cf3  
+\f2\i \cf4 menu item
+\f0\i0 \cf3  6 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 menu
+\f0\i0 \cf3  1 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 outline
+\f0\i0 \cf3  1 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 scroll area
+\f0\i0 \cf3  1 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 splitter group
+\f0\i0 \cf3  1\
+				
+\f1\b \cf4 key code
+\f0\b0 \cf3  53\
+				\
+				\cf2 -- select audio format ''\cf3 \
+				
+\f1\b \cf4 perform
+\f0\b0 \cf3  
+\f2\i \cf4 action
+\f0\i0 \cf3  "AXPress" 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 radio button
+\f0\i0 \cf3  "Output" 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 tab group
+\f0\i0 \cf3  1 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 splitter group
+\f0\i0 \cf3  1\
+				
+\f1\b \cf4 perform
+\f0\b0 \cf3  
+\f2\i \cf4 action
+\f0\i0 \cf3  "AXPress" 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 pop up button
+\f0\i0 \cf3  2 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 tab group
+\f0\i0 \cf3  1 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 splitter group
+\f0\i0 \cf3  1\
+				
+\f1\b \cf4 click
+\f0\b0 \cf3  
+\f2\i \cf4 menu item
+\f0\i0 \cf3  \cf7 audioFormat\cf3  
+\f1\b of
+\f0\b0  
+\f2\i \cf4 menu
+\f0\i0 \cf3  1 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 pop up button
+\f0\i0 \cf3  2 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 tab group
+\f0\i0 \cf3  1 
+\f1\b of
+\f0\b0  
+\f2\i \cf4 splitter group
+\f0\i0 \cf3  1\
+			
+\f1\b end
+\f0\b0  
+\f1\b tell
+\f0\b0 \
+		
+\f1\b end
+\f0\b0  
+\f1\b tell
+\f0\b0 \
+		\
+		
+\f1\b \cf4 quit
+\f0\b0 \cf3  
+\f2\i \cf4 application
+\f0\i0 \cf3  "Audio MIDI Setup"\
+		\
+	
+\f1\b end
+\f0\b0  
+\f1\b tell
+\f0\b0 \
+	\
+
+\f1\b end
+\f0\b0  \cf5 SetAudioDevice\cf3 \
+\
+\
+\
+\
+\cf2 -- END APPLESCRIPT --\cf3 \
+}
